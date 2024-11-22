@@ -1,42 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Phonebook App</title>
-    <style>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Phonebook App</title>
+        <style>
         /* Add your CSS here */
     </style>
-</head>
+    </head>
 
-<body>
-    <h1>Phonebook App</h1>
+    <body>
+        <h1>Phonebook App</h1>
 
-    <div>
-        <input type="text" id="name" placeholder="Name">
-        <input type="text" id="phone" placeholder="Phone Number">
-        <button onclick="addContact()">Add Contact</button>
-    </div>
+        <div>
+            <input type="text" id="name" placeholder="Enter Name">
+            <input type="text" id="phone" placeholder="Phone Number">
+            <button onclick="addContact()">Add Contact</button>
+        </div>
 
-    <br>
+        <br>
 
-    <input type="text" id="search" placeholder="Search by name" oninput="searchContact()">
+        <input type="text" id="search" placeholder="Search by name"
+            oninput="searchContact()">
+        <br>
+        <br>
 
-    
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Phone Number</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody id="contactsTable"></tbody>
-    </table>
-    <script>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="contactsTable"></tbody>
+        </table>
+        <script>
         /* Add your JavaScript here */
     </script>
-</body>
+    </body>
 
 </html>
