@@ -1,44 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Phonebook App</title>
-        <style>
-        /* Add your CSS here */
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phonebook App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        input {
+            padding: 5px;
+            margin: 5px;
+        }
+
+        button {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 15px;
+            color: white;
+            background-color: brown;
+
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: blueviolet;
+            font-size: 40px;
+            padding: 20px;
+        }
     </style>
-    </head>
+</head>
 
-    <body>
-        <h1>Phonebook App</h1>
+<body>
+    <h1>Phonebook App</h1>
 
-        <div>
-            <input type="text" id="name" placeholder="Enter Name">
-            <input type="text" id="phone" placeholder="Phone Number">
-            <button onclick="addContact()">Add Contact</button>
-        </div>
+    <div>
+        <input type="text" id="name" placeholder="Enter Name">
+        <input type="text" id="phone" placeholder="Phone Number">
+        <button onclick="addContact()">Add Contact</button>
+    </div>
 
-        <br>
+    <br>
 
-        <input type="text" id="search" placeholder="Search by name"
-            oninput="searchContact()">
-        <br>
-        <br>
+    <input type="text" id="search" placeholder="Search by name" oninput="searchContact()">
+    <br>
+    <br>
 
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Phone Number</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="contactsTable"></tbody>
-        </table>
-        <script>
-        /* Add your JavaScript here */
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Phone Number</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="contactsTable"></tbody>
+    </table>
+    <script>
+        let contacts = [];
+
+        function addContact() {
+            const name = document.getElementById('name').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+
+            if (!name || !phone) {
+                alert('Please enter both name and phone number.');
+                return;
+            }
+
+            contacts.push({ name, phone });
+            displayContacts();
+            document.getElementById('name').value = '';
+            document.getElementById('phone').value = '';
+        }
+
+        function displayContacts(filter = '') {
+            const tableBody = document.getElementById('contactsTable');
+            tableBody.innerHTML = '';
+
+            contacts
+                .filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase()))
+                .forEach((contact, index) => {
+                    const row = `<tr>
+                <td>${contact.name}</td>
+                <td>${contact.phone}</td>
+                <td><button onclick="deleteContact(${index})">Delete</button></td>
+            </tr>`;
+                    tableBody.innerHTML += row;
+                });
+        }
+
+        function deleteContact(index) {
+            contacts.splice(index, 1);
+            displayContacts();
+        }
+
+        function searchContact() {
+            const searchQuery = document.getElementById('search').value;
+            displayContacts(searchQuery);
+        }
+
+        // Initial display
+        displayContacts();
     </script>
-    </body>
+</body>
 
 </html>
